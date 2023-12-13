@@ -200,3 +200,20 @@ input[type="radio"] {
   font-weight: 800;
   margin-right: 0.5em;
 }
+
+/*input[type='password'] {
+  padding-right: 2.5em;
+}*/
+#pain-mail{
+  position: relative;
+}
+
+.toggle-password {
+  cursor: pointer;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+

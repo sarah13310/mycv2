@@ -493,6 +493,8 @@ body {
 }
 
 .card-option{
+  display: flex;
+  width: 100%;
   border: 1px solid rgb(141, 141, 141) !important;
   /* border-radius: 12px !important; */
   padding: 24px 16px !important;
@@ -506,3 +508,7 @@ body {
   /* margin-bottom: 8px; */
   cursor: pointer;
 }
+
+
+
+

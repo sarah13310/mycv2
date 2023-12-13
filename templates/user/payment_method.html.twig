@@ -17,6 +17,7 @@
 			</section>
 			<section>
 				<label class="mt-2 bold">Pays/région de facturation</label>
+
 				{{ include('/partials/form/form_payment_method.html.twig') }}
 			</section>
 
@@ -24,6 +25,50 @@
 	</div>
 {% endblock %}
 {% block js %}
-	
+	<script src="{{asset('/build/js/common.js')}}"></script>
+	<script>
+		//getCountry("{{ asset('build/data/country.json') }}").then((country) => {
+		loadCountryOnlyToSelect("{{ asset('build/data/country.json') }}", "FR", "payment_method_form_country");
+		//		});
+		let options= document.querySelectorAll(".card-option");
+		let checks= document.querySelectorAll(".form-check-input");
+
+
+		options.forEach((option)=>{
+			option.addEventListener("click",(elem)=>{
+
+				let item=elem.target;				
+				if (item.localName=="div"){
+					//item=item.parentElement;
+					deselectAll();
+					let chk= item.children[2].children[0];
+					chk.setAttribute("checked", "");
+				}
+				if (item.localName=="span"){
+					item=item.parentElement;
+					deselectAll();
+					let chk= item.children[2].children[0];
+					chk.setAttribute("checked", "");
+				}
+				if (item.localName=="li"){
+					item=item.parentElement.parentElement.parentElement;
+					deselectAll();
+					let chk= item.children[2].children[0];
+					chk.setAttribute("checked", "");
+				}
+				
+					
+
+			})	
+		});
+
+		function deselectAll(){
+			checks.forEach((item)=>{
+				item.removeAttribute("checked");
+			})
+
+		}
+
+	</script>
 	
 {% endblock %}

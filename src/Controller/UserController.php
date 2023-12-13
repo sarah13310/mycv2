@@ -181,8 +181,7 @@ class UserController extends AbstractController
     #[Route('/payment/payout-method', name: 'payment.method')]
     public function payment_method(
         Request $request,
-        Factory $factory,
-        Util $helper,
+        Factory $factory,        
         EntityManagerInterface $em,
         ExtraRepository  $giftRepository
     ): Response {

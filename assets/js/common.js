@@ -12,7 +12,7 @@ async function fetchDataPhone(file) {
   }
 }
 
-async function fetchCountry(file="https://ip-api.io/json") {
+async function fetchCountry(file = "https://ip-api.io/json") {
   fetch(file, {
     method: "GET",
   })
@@ -29,7 +29,7 @@ async function fetchCountry(file="https://ip-api.io/json") {
     });
 }
 
-async function fetchIPAddress(file="https://api.ipify.org?format=json") {
+async function fetchIPAddress(file = "https://api.ipify.org?format=json") {
   return new Promise((resolve, reject) => {
     fetch(file)
       .then((response) => response.json())
@@ -68,11 +68,14 @@ async function loadJson(file) {
   });
 }
 
-function loadCountryToSelect(file, selectedCountry) {
+function loadCountryToSelect(
+  file,
+  selectedCountry = "FR",
+  tag = "countrySelect"
+) {
   fetchDataPhone(file).then((data) => {
     if (data) {
-      const selectElement = document.getElementById("countrySelect");
-
+      const selectElement = document.getElementById(tag);
       data.forEach((country) => {
         const option = document.createElement("option");
         option.value = country.indicatif;
@@ -114,13 +117,13 @@ async function loadPanelAccount(file) {
   });
 }
 
-function loadCountryOnlyToSelect(
+async function loadCountryOnlyToSelect(
   file,
   selectedCountry,
   tagId = "countryOnlySelect",
   isOnlyCountry = true
 ) {
-    fetchDataPhone(file).then((data) => {
+  fetchDataPhone(file).then((data) => {
     if (data) {
       // Ici, vous pouvez utiliser les données JSON récupérées
       // Par exemple, vous pouvez créer et remplir le select avec ces données
@@ -143,26 +146,36 @@ function loadCountryOnlyToSelect(
   });
 }
 
-
 // Telephone
 const maskTelOptions = {
-  mask: '+00[0] 0 00 00 00 00',	
+  mask: "+00[0] 0 00 00 00 00",
   lazy: false, // rendre placeholder toujours visible
-  placeholderChar: 'X'
-  };
+  placeholderChar: "X",
+};
 
-
- // Carte CB
+// Carte CB
 const maskCardOptions = {
-  mask: '0000 0000 0000 0000',	
+  mask: "0000 0000 0000 0000",
   lazy: false, // rendre placeholder toujours visible
   //placeholderChar: '0'
-  };
+};
 
-
-   // Date MM/AA
+// Date MM/AA
 const maskExpireOptions = {
-  mask: '00/00',	
+  mask: "00/00",
   lazy: false, // rendre placeholder toujours visible
   //placeholderChar: '_'
-  };
+};
+
+// mot de passe visible ou non
+
+function togglePasswordVisibility(elem) {
+  elem = elem.firstElementChild;
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    elem.classList = "bi bi-eye-slash";
+  } else {
+    passwordInput.type = "password";
+    elem.classList = "bi bi-eye";
+  }
+}
